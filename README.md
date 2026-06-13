@@ -19,3 +19,7 @@ AI-powered vehicle classification system built using Python, Django, TensorFlow,
 - Real-time video classification
 - Improved model accuracy
 - Multi-class vehicle detection
+
+Model Accuracy: 91%
+Classes: Car, Bus, Truck, Bike
+Dataset Size: 5000 images
