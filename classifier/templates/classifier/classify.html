@@ -1,0 +1,81 @@
+{% extends 'classifier/base.html' %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 4rem auto;">
+    <div class="glass-card">
+        <h2 style="margin-bottom:.5rem; font-family:'Outfit'; text-align:center;">New Classification</h2>
+        <p style="text-align:center; color:var(--text-muted); margin-bottom:.75rem;">
+            Upload any vehicle photo — car, bus, bike, truck, taxi &amp; more.
+        </p>
+
+        <!-- Supported vehicle chips -->
+        <div style="display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-bottom:2rem;">
+            <h3> 🚗 Car <br>  🏎 Sports Car <br>   🚕 Taxi  <br>  🚌 Bus <br>   🚍 Minibus <br>   🚎 School Bus <br>    🚐 Minivan <br>   🚚 Truck  <br>    🚛 Semi-Truck  <br>    🚜 Tractor    <br>  🏍 Motorcycle    <br>   🛵 Scooter  <br>    🚲 Bicycle    <br>  🚑 Ambulance   <br>   🚒 Fire Truck </h3>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" id="upload-form">
+            {% csrf_token %}
+            <div class="upload-area" id="drop-zone">
+                <div id="upload-prompt">
+                    <p style="font-size:3rem; margin-bottom:1rem;">📸</p>
+                    <p style="font-weight:600; margin-bottom:.5rem;">Click to upload or drag &amp; drop</p>
+                    <p style="color:var(--text-muted); font-size:.9rem;">JPG, PNG or WEBP · Max 10 MB</p>
+                </div>
+                <img id="preview" style="display:none; max-width:100%; border-radius:12px; margin-top:1rem;">
+                <input type="file" name="image" id="image-input" style="display:none;" required accept="image/*">
+            </div>
+
+            <button type="submit" class="btn-primary" id="submit-btn" style="width:100%; margin-top:2rem; padding:1.2rem;">
+                Run AI Inference
+            </button>
+        </form>
+
+        <!-- Two-stage explanation -->
+        <div style="margin-top:2rem; padding:1rem 1.2rem; background:rgba(255,255,255,.04); border-radius:10px; border:1px solid var(--glass-border);">
+            <p style="font-size:.85rem; color:var(--text-muted); line-height:1.7;">
+                <strong style="color:#fff;">How it works:</strong>
+                A general Vision Transformer first detects the vehicle category.
+                If a <em>car</em> is detected, a specialist model trained on the Stanford Cars dataset
+                provides the precise make, model &amp; year.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const dropZone   = document.getElementById('drop-zone');
+    const imageInput = document.getElementById('image-input');
+    const preview    = document.getElementById('preview');
+    const prompt     = document.getElementById('upload-prompt');
+    const submitBtn  = document.getElementById('submit-btn');
+    const form       = document.getElementById('upload-form');
+
+    dropZone.onclick = () => imageInput.click();
+
+    imageInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                prompt.style.display  = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    form.onsubmit = () => {
+        submitBtn.disabled    = true;
+        submitBtn.textContent = '⏳ Analysing…';
+    };
+
+    dropZone.ondragover  = (e) => { e.preventDefault(); dropZone.style.borderColor = 'var(--primary)'; };
+    dropZone.ondragleave = ()  => { dropZone.style.borderColor = 'var(--glass-border)'; };
+    dropZone.ondrop      = (e) => {
+        e.preventDefault();
+        imageInput.files = e.dataTransfer.files;
+        imageInput.onchange({ target: { files: e.dataTransfer.files } });
+    };
+</script>
+{% endblock %}

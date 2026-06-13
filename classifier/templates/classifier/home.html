@@ -1,0 +1,35 @@
+{% extends 'classifier/base.html' %}
+
+{% block content %}
+<div style="text-align: center; padding: 6rem 0;">
+    <h1 style="font-size: 4.5rem; font-family: 'Outfit'; margin-bottom: 1.5rem; line-height: 1.1;">
+        The Future of <span style="color: var(--primary);">Vehicle Intelligence</span>
+    </h1>
+    <p style="font-size: 1.4rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 3rem;">
+        Harness the power of Vision Transformers to identify any vehicle — cars, buses, bikes, trucks, taxis &amp; more — with pinpoint accuracy.
+    </p>
+    <div style="display: flex; gap: 1.5rem; justify-content: center;">
+        <a href="{% url 'signup' %}" class="btn-primary" style="padding: 1.2rem 3rem; font-size: 1.1rem;">Get Started Free</a>
+        <a href="{% url 'about' %}" class="glass-card" style="padding: 1.2rem 3rem; text-decoration: none; color: white; font-weight: 600;">Learn More</a>
+    </div>
+</div>
+
+<div class="stats-grid" style="margin-top: 4rem;">
+    <div class="stat-card" style="text-align: center;">
+        <span class="value">17+</span>
+        <span class="label">Vehicle Categories</span>
+    </div>
+    <div class="stat-card" style="text-align: center;">
+        <span class="value">196</span>
+        <span class="label">Car Make/Models</span>
+    </div>
+    <div class="stat-card" style="text-align: center;">
+        <span class="value">95%</span>
+        <span class="label">Avg Accuracy</span>
+    </div>
+    <div class="stat-card" style="text-align: center;">
+        <span class="value">2-Stage</span>
+        <span class="label">AI Pipeline</span>
+    </div>
+</div>
+{% endblock %}

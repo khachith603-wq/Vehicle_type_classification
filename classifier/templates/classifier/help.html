@@ -1,0 +1,41 @@
+{% extends 'classifier/base.html' %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 3rem; text-align: center;">How to use Vehicle<span>IQ</span></h1>
+
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--primary);">1. Take a Clear Photo</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">For the best results, ensure the vehicle is the main subject of the photo. Avoid extreme angles or very blurry images.</p>
+    </div>
+
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--primary);">2. Upload and Wait</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Go to the "New Prediction" page and upload your image. The AI engine takes about 2-5 seconds to analyze the deep features of the vehicle.</p>
+    </div>
+
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--primary);">3. Explore the Results</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Your dashboard will show the specific model identified along with a confidence score. All results are saved privately to your account.</p>
+    </div>
+
+    <div style="margin-top: 4rem;">
+        <h2 style="margin-bottom: 2rem; text-align: center;">Frequently Asked Questions</h2>
+        
+        <div style="margin-bottom: 2rem;">
+            <p style="font-weight: 600; margin-bottom: 0.5rem;">Q: Does it recognize every car in the world?</p>
+            <p style="color: var(--text-muted);">A: Our model recognizes over 190 of the most common and iconic vehicle models. We are constantly expanding our AI's knowledge base.</p>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <p style="font-weight: 600; margin-bottom: 0.5rem;">Q: Is my data private?</p>
+            <p style="color: var(--text-muted);">A: Yes! Only you can see your classification history and the images you upload.</p>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <p style="font-weight: 600; margin-bottom: 0.5rem;">Q: Why did it show "Error"?</p>
+            <p style="color: var(--text-muted);">A: Errors usually happen if the image format is unsupported or if the file was corrupted during upload. Try uploading a standard JPG or PNG.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

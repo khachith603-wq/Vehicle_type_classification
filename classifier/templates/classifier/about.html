@@ -1,0 +1,64 @@
+{% extends 'classifier/base.html' %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 4rem;">
+        <h1 style="font-size: 3.5rem; margin-bottom: 1rem; font-family: 'Outfit';">About <span>VehicleIQ</span></h1>
+        <p style="font-size: 1.2rem; color: var(--text-muted);">The intersection of automotive passion and artificial intelligence.</p>
+    </div>
+
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Our Mission</h2>
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+            VehicleIQ was built to provide enthusiasts and industry professionals with instant, high-accuracy vehicle identification.
+            Whether you're a car spotter, fleet manager, or just curious about a vehicle you saw on the street,
+            our two-stage AI engine delivers both broad coverage and deep precision.
+        </p>
+    </div>
+
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Two-Stage AI Engine</h2>
+        <p style="margin-bottom: 1.5rem; color: var(--text-muted); line-height: 1.8;">
+            VehicleIQ uses a two-stage classification pipeline so it can identify any vehicle on the road,
+            while still giving deep make/model detail for cars.
+        </p>
+
+        <!-- Stage 1 -->
+        <div style="display:flex; gap:1.2rem; align-items:flex-start; margin-bottom:1.5rem; padding:1.2rem; background:rgba(255,255,255,.04); border-radius:10px; border:1px solid var(--glass-border);">
+            <span style="font-size:1.8rem;">🔍</span>
+            <div>
+                <h3 style="margin-bottom:.5rem;">Stage 1 — General Vehicle Detection</h3>
+                <p style="color:var(--text-muted); line-height:1.7;">
+                    <strong style="color:#fff;">google/vit-base-patch16-224</strong> — a Vision Transformer trained on ImageNet-1k (1 000 classes).
+                    It identifies the broad vehicle category: bus, truck, motorcycle, bicycle, taxi, ambulance, tractor, and more.
+                </p>
+            </div>
+        </div>
+
+        <!-- Stage 2 -->
+        <div style="display:flex; gap:1.2rem; align-items:flex-start; padding:1.2rem; background:rgba(255,255,255,.04); border-radius:10px; border:1px solid var(--glass-border);">
+            <span style="font-size:1.8rem;">🏎</span>
+            <div>
+                <h3 style="margin-bottom:.5rem;">Stage 2 — Car Specialist (Cars only)</h3>
+                <p style="color:var(--text-muted); line-height:1.7;">
+                    <strong style="color:#fff;">therealcyberlord/stanford-car-vit-patch16</strong> — a ViT fine-tuned on the Stanford Cars dataset.
+                    When Stage 1 detects a car, this model takes over and returns the exact make, model, and year
+                    from 196 specific classes.
+                </p>
+            </div>
+        </div>              
+    </div>
+
+    <div class="glass-card" style="margin-bottom: 2rem;">
+        <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Supported Vehicle Types</h2>
+        <div style="display:flex; flex-wrap:wrap; gap:.75rem;">
+         <h3> 🚗 Car <br>  🏎 Sports Car <br>   🚕 Taxi  <br>  🚌 Bus <br>   🚍 Minibus <br>   🚎 School Bus <br>    🚐 Minivan          <br>   🚚 Truck  <br>    🚛 Semi-Truck  <br>    🚜 Tractor         <br>  🏍 Motorcycle    <br>   🛵 Scooter  <br>    🚲 Bicycle    <br>  🚑 Ambulance   <br>   🚒 Fire Truck </h3>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 4rem;">
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">Ready to see it in action?</p>
+        <a href="{% url 'classify' %}" class="btn-primary" style="padding: 1.2rem 3rem; font-size: 1.1rem;">Try the Engine Now</a>
+    </div>
+</div>
+{% endblock %}

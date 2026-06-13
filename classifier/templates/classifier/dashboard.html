@@ -1,0 +1,84 @@
+{% extends 'classifier/base.html' %}
+
+{% block content %}
+<div class="dashboard-header" style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+    <div>
+        <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Welcome back, {{ user.username }}</h1>
+        <p style="color: var(--text-muted);">Here's what your AI has discovered recently.</p>
+    </div>
+    <a href="{% url 'classify' %}" class="btn-primary">New Classification</a>
+</div>
+
+<!-- Stats Section -->
+<div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin: 2rem 0 3rem;">
+    <div class="stat-card">
+        <div class="label">Total Predictions</div>
+        <div class="value">{{ total_count }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">Avg. Confidence</div>
+        <div class="value">{{ avg_confidence }}%</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">Top Vehicle Type</div>
+        <div class="value" style="font-size: 1.4rem;">{{ top_type }}</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">Last 24 Hours</div>
+        <div class="value">{{ last_24h }}</div>
+    </div>
+</div>
+
+<!-- Vehicle type breakdown bar -->
+{% if type_breakdown %}
+<div class="glass-card" style="margin-bottom: 3rem; padding: 1.8rem 2rem;">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em;">Vehicle Type Breakdown</h3>
+    {% for item in type_breakdown %}
+    <div style="margin-bottom: 1rem;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:.4rem;">
+            <span style="font-weight:600;">{{ item.vehicle_type }}</span>
+            <span style="color:var(--text-muted);">{{ item.cnt }}</span>
+        </div>
+        <div style="width:100%; height:8px; background:rgba(255,255,255,.08); border-radius:10px; overflow:hidden;">
+            {% widthratio item.cnt total_count 100 as pct %}
+            <div style="width:{{ pct }}%; height:100%; background:var(--primary); border-radius:10px; transition:width .6s ease;"></div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h2 style="font-size: 1.8rem;">Recent Predictions</h2>
+    <a href="{% url 'history' %}" style="color: var(--primary); text-decoration: none; font-weight: 600;">View All History &rarr;</a>
+</div>
+
+{% if predictions %}
+    <div class="history-grid">
+        {% for prediction in predictions %}
+            <div class="prediction-card">
+                <img src="{{ prediction.image.url }}" alt="{{ prediction.label }}" class="prediction-image">
+                <div class="prediction-info">
+                    <!-- vehicle type badge -->
+                    {% if prediction.vehicle_type == "Error" or prediction.vehicle_type == "Processing..." %}
+                        <span class="badge badge-error">{{ prediction.vehicle_type }}</span>
+                    {% else %}
+                        <span class="badge badge-type">{{ prediction.vehicle_type }}</span>
+                    {% endif %}
+                    <h3 style="margin-top:.6rem;">{{ prediction.label }}</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                        <p style="font-size:.85rem; color:var(--text-muted);">{{ prediction.created_at|date:"M d, Y H:i" }}</p>
+                        <p style="color: var(--primary); font-weight: 700;">{{ prediction.confidence|floatformat:1 }}%</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="glass-card" style="text-align: center; padding: 4rem;">
+        <p style="color: var(--text-muted); font-size: 1.1rem;">No predictions yet. Start by uploading an image!</p>
+        <br>
+        <a href="{% url 'classify' %}" class="btn-primary">Get Started</a>
+    </div>
+{% endif %}
+{% endblock %}
