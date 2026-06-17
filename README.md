@@ -24,16 +24,24 @@ Model Accuracy: 91%
 Classes: Car, Bus, Truck, Bike
 Dataset Size: 5000 images
 
-project structure
+project structure-
+
 Vehicle_type_classification/
 │
+
 ├── classifier/
+
 ├── vehicle_project/
+
 ├── manage.py
+
 ├── requirements.txt
+
 ├── model.keras
 
+
 Architecture-
+
 User Upload
 
 ↓
