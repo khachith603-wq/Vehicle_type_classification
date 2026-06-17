@@ -24,18 +24,38 @@ Model Accuracy: 91%
 Classes: Car, Bus, Truck, Bike
 Dataset Size: 5000 images
 
+project structure
+Vehicle_type_classification/
+│
+├── classifier/
+├── vehicle_project/
+├── manage.py
+├── requirements.txt
+├── model.keras
+
 Architecture-
 User Upload
+
 ↓
+
 Django Backend
+
 ↓
+
 VehicleClassifier
+
 ↓
+
 Transformer / Vision Model
+
 ↓
+
 Prediction
+
 ↓
+
 Dashboard History
+
 
 <img width="1775" height="876" alt="image" src="https://github.com/user-attachments/assets/42d3a290-08c7-46cd-bff1-bb26ac91f968" />
 <img width="1756" height="868" alt="image" src="https://github.com/user-attachments/assets/e8fe390b-87fb-4552-b18c-02fd3d2a1175" />
