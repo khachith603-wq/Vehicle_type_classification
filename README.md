@@ -69,5 +69,5 @@ Dashboard History
 <img width="1756" height="868" alt="image" src="https://github.com/user-attachments/assets/e8fe390b-87fb-4552-b18c-02fd3d2a1175" />
 <img width="377" height="772" alt="image" src="https://github.com/user-attachments/assets/12527950-ea9d-4798-aecc-aeccc283676c" />
 <img width="1767" height="892" alt="image" src="https://github.com/user-attachments/assets/b5f4a933-6529-4844-9b5b-a527ffc661e8" />
-
-Please contact me for more information
+Still, I am working on this project for more vehicles
+Please get in touch with me for more information
